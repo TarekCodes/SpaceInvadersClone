@@ -29,6 +29,22 @@ public class Enemies {
         }
     }
 
+    public boolean hitByBullet(Vector2 bulletPos){
+        enemyList.begin();
+        boolean hit = false;
+        for (int i = 0; i < enemyList.size; i++) {
+            if (enemyList.get(i).position.x<=bulletPos.x &&
+                    enemyList.get(i).position.x+Constants.ENEMY_DIMENSION.x>=bulletPos.x &&
+                    enemyList.get(i).position.y<bulletPos.y+5) {
+                enemyList.removeIndex(i);
+                hit=true;
+                break;
+            }
+        }
+        enemyList.end();
+        return hit;
+    }
+
     public void update(float delta) {
         for (Enemy enemy : enemyList) {
             enemy.update(delta);

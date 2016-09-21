@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Enemy {
     private Viewport viewport;
-    private Vector2 position;
+    public Vector2 position;
     private float speed;
     private Vector2 offset;
 
@@ -22,7 +22,7 @@ public class Enemy {
         init();
     }
     public void init(){
-        position = new Vector2(offset.x, viewport.getWorldHeight()-25-offset.y);
+        position = new Vector2(offset.x+1, viewport.getWorldHeight()-25-offset.y);
     }
 
     public void update(float delta) {

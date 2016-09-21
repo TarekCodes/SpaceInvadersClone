@@ -35,6 +35,9 @@ public class SpaceInvadersScreen implements Screen {
         player.update(delta);
         bullets.update(delta, player.position);
         enemies.update(delta);
+        if(enemies.hitByBullet(bullets.getBulletPos())) {
+            bullets.init();
+        }
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(BACKGROUND_COLOR.r, BACKGROUND_COLOR.g, BACKGROUND_COLOR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

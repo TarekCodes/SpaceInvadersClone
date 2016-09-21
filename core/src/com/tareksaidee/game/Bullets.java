@@ -44,6 +44,13 @@ public class Bullets {
         bulletList.end();
     }
 
+    public Vector2 getBulletPos(){
+        if(bulletList.size!=0)
+            return bulletList.get(0).position;
+        else
+            return new Vector2(0,0);
+    }
+
     public void render(ShapeRenderer renderer) {
         renderer.setColor(Color.PURPLE);
         for (Bullet bullet : bulletList) {
