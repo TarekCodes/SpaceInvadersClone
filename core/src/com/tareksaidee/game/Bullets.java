@@ -21,7 +21,7 @@ public class Bullets {
     }
 
     public void init() {
-        bulletList = new DelayedRemovalArray<Bullet>(false, 100);
+        bulletList = new DelayedRemovalArray<Bullet>(false, 5);
     }
 
     public void update(float delta, Vector2 playerPos) {

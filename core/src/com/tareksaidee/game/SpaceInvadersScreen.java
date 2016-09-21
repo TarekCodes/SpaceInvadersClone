@@ -17,21 +17,24 @@ public class SpaceInvadersScreen implements Screen {
     ShapeRenderer renderer;
     Player player;
     Bullets bullets;
+    Enemies enemies;
 
 
     @Override
     public void show() {
-        spaceInvadersViewport = new ExtendViewport(Constants.WORLD_SIZE,Constants.WORLD_SIZE);
+        spaceInvadersViewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
         player = new Player(spaceInvadersViewport);
         bullets = new Bullets(spaceInvadersViewport);
+        enemies = new Enemies(spaceInvadersViewport);
     }
 
     @Override
     public void render(float delta) {
         player.update(delta);
-        bullets.update(delta,player.position);
+        bullets.update(delta, player.position);
+        enemies.update(delta);
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(BACKGROUND_COLOR.r, BACKGROUND_COLOR.g, BACKGROUND_COLOR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -39,14 +42,16 @@ public class SpaceInvadersScreen implements Screen {
         renderer.begin();
         player.render(renderer);
         bullets.render(renderer);
+        enemies.render(renderer);
         renderer.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        spaceInvadersViewport.update(width,height,true);
+        spaceInvadersViewport.update(width, height, true);
         player.init();
         bullets.init();
+        enemies.init();
     }
 
     @Override
