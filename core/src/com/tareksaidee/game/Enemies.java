@@ -35,13 +35,16 @@ public class Enemies {
         for (int i = 0; i < enemyList.size; i++) {
             if (enemyList.get(i).position.x<=bulletPos.x &&
                     enemyList.get(i).position.x+Constants.ENEMY_DIMENSION.x>=bulletPos.x &&
-                    enemyList.get(i).position.y<bulletPos.y+5) {
+                    enemyList.get(i).position.y>=bulletPos.y &&
+                    enemyList.get(i).position.y<=bulletPos.y+5) {
                 enemyList.removeIndex(i);
                 hit=true;
                 break;
             }
         }
         enemyList.end();
+        if(enemyList.size==0)
+            init();
         return hit;
     }
 

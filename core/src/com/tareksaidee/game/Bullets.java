@@ -21,11 +21,11 @@ public class Bullets {
     }
 
     public void init() {
-        bulletList = new DelayedRemovalArray<Bullet>(false, 5);
+        bulletList = new DelayedRemovalArray<Bullet>(false, 100);
     }
 
     public void update(float delta, Vector2 playerPos) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && bulletList.size<1){
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && bulletList.size<Constants.ALLOWED_BULLETS){
             Vector2 bulletPos = new Vector2(playerPos.x,Constants.PLAYER_HEIGHT);
             Bullet bullet = new Bullet(bulletPos);
             bulletList.add(bullet);
