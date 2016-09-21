@@ -25,7 +25,7 @@ public class Bullets {
     }
 
     public void update(float delta, Vector2 playerPos) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && bulletList.size<4){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && bulletList.size<1){
             Vector2 bulletPos = new Vector2(playerPos.x,Constants.PLAYER_HEIGHT);
             Bullet bullet = new Bullet(bulletPos);
             bulletList.add(bullet);

@@ -13,6 +13,6 @@ public class Constants {
     public static final Color PLAYER_COLOR = Color.RED;
     public static final float PLAYER_MOVEMENT_SPEED = 50.0f;
 
-    public static final float BULLET_SPEED = 14.0f;
+    public static final float BULLET_SPEED = 50.0f;
 
 }
