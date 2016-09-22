@@ -2,7 +2,6 @@ package com.tareksaidee.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
  */
 public class SpaceInvadersScreen implements Screen {
 
-    public static final Color BACKGROUND_COLOR = Color.BLACK;
     ExtendViewport spaceInvadersViewport;
     ShapeRenderer renderer;
     Player player;
@@ -39,7 +37,8 @@ public class SpaceInvadersScreen implements Screen {
             bullets.init();
         }
         spaceInvadersViewport.apply(true);
-        Gdx.gl.glClearColor(BACKGROUND_COLOR.r, BACKGROUND_COLOR.g, BACKGROUND_COLOR.b, 1);
+        Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
+                Constants.BACKGROUND_COLOR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.setProjectionMatrix(spaceInvadersViewport.getCamera().combined);
         renderer.begin();
