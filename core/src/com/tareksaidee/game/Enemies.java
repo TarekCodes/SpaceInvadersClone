@@ -29,21 +29,23 @@ public class Enemies {
         }
     }
 
-    public boolean hitByBullet(Vector2 bulletPos){
+    public boolean hitByBullet(Vector2 bulletPos) {
         enemyList.begin();
         boolean hit = false;
         for (int i = 0; i < enemyList.size; i++) {
-            if (enemyList.get(i).position.x<=bulletPos.x &&
-                    enemyList.get(i).position.x+Constants.ENEMY_DIMENSION.x>=bulletPos.x &&
-                    enemyList.get(i).position.y>=bulletPos.y &&
-                    enemyList.get(i).position.y<=bulletPos.y+5) {
+            if (enemyList.get(i).position.x <= bulletPos.x &&
+                    enemyList.get(i).position.x + Constants.ENEMY_DIMENSION.x >= bulletPos.x &&
+                    ((enemyList.get(i).position.y <= bulletPos.y &&
+                            enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y)
+                    || (enemyList.get(i).position.y <= bulletPos.y+5 &&
+                    enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y+5))) {
                 enemyList.removeIndex(i);
-                hit=true;
+                hit = true;
                 break;
             }
         }
         enemyList.end();
-        if(enemyList.size==0)
+        if (enemyList.size == 0)
             init();
         return hit;
     }
