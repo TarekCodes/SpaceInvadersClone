@@ -8,26 +8,26 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by tarek on 9/20/2016.
  */
 
-public class Enemy {
+class Enemy {
     private Viewport viewport;
-    public Vector2 position;
+    Vector2 position;
     private float speed;
     private Vector2 offset;
-    public int cycles;
+    int cycles;
 
-    public Enemy(Viewport viewport, Vector2 offset) {
+    Enemy(Viewport viewport, Vector2 offset) {
         this.viewport = viewport;
         speed = Constants.ENEMY_SPEED;
         this.offset = offset;
         init();
     }
 
-    public void init() {
+    private void init() {
         position = new Vector2(offset.x + 1, viewport.getWorldHeight() - 25 - offset.y);
         cycles = 0;
     }
 
-    public void update(float delta) {
+    void update(float delta) {
         position.x += speed * delta;
         checkBounds();
         if (stepDown())
@@ -50,7 +50,7 @@ public class Enemy {
         }
     }
 
-    public void render(ShapeRenderer shapeRenderer) {
+    void render(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(position.x, position.y, Constants.ENEMY_DIMENSION.x,
                 Constants.ENEMY_DIMENSION.y);
     }

@@ -10,22 +10,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Created by tarek on 9/19/2016.
  */
-public class Bullets {
+class Bullets {
     DelayedRemovalArray<Bullet> bulletList;
     Viewport viewport;
     boolean goUp;
 
-    public Bullets(Viewport viewport, boolean state) {
+    Bullets(Viewport viewport, boolean state) {
         this.viewport = viewport;
         goUp = state;
         init();
     }
 
-    public void init() {
+    void init() {
         bulletList = new DelayedRemovalArray<Bullet>(false, 10);
     }
 
-    public void update(float delta, Vector2 sourcePos) {
+    void update(float delta, Vector2 sourcePos) {
         if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) && bulletList.size < Constants.ALLOWED_BULLETS && goUp)
                 || (!goUp && bulletList.size < Constants.ALLOWED_BULLETS)) {
             Vector2 bulletPos = new Vector2(sourcePos.x, sourcePos.y);
@@ -46,15 +46,15 @@ public class Bullets {
         bulletList.end();
     }
 
-    public Vector2 getBulletPos() {
+    Vector2 getBulletPos() {
         if (bulletList.size != 0)
             return bulletList.get(0).position;
         else
             return new Vector2(0, 0);
     }
 
-    public void render(ShapeRenderer renderer) {
-        renderer.setColor(((goUp)?Constants.PLAYER_BULLET_COLOR:Constants.ENEMY_BULLET_COLOR));
+    void render(ShapeRenderer renderer) {
+        renderer.setColor(((goUp) ? Constants.PLAYER_BULLET_COLOR : Constants.ENEMY_BULLET_COLOR));
         for (Bullet bullet : bulletList) {
             bullet.render(renderer);
         }

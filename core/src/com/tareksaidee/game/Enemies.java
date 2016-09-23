@@ -9,16 +9,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by tarek on 9/20/2016.
  */
 
-public class Enemies {
+class Enemies {
     DelayedRemovalArray<Enemy> enemyList;
-    Viewport viewport;
+    private Viewport viewport;
 
-    public Enemies(Viewport viewport) {
+    Enemies(Viewport viewport) {
         this.viewport = viewport;
         init();
     }
 
-    public void init() {
+    void init() {
         enemyList = new DelayedRemovalArray<Enemy>(false, (int) (Constants.ENEMY_NUMBER.x
                 * Constants.ENEMY_NUMBER.y));
         for (int i = 0; i < Constants.ENEMY_NUMBER.x; i++) {
@@ -29,7 +29,7 @@ public class Enemies {
         }
     }
 
-    public boolean hitByBullet(Vector2 bulletPos) {
+    boolean hitByBullet(Vector2 bulletPos) {
         enemyList.begin();
         boolean hit = false;
         for (int i = 0; i < enemyList.size; i++) {
@@ -37,8 +37,8 @@ public class Enemies {
                     enemyList.get(i).position.x + Constants.ENEMY_DIMENSION.x >= bulletPos.x &&
                     ((enemyList.get(i).position.y <= bulletPos.y &&
                             enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y)
-                    || (enemyList.get(i).position.y <= bulletPos.y+5 &&
-                    enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y+5))) {
+                            || (enemyList.get(i).position.y <= bulletPos.y + 5 &&
+                            enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y + 5))) {
                 enemyList.removeIndex(i);
                 hit = true;
                 break;
@@ -50,13 +50,13 @@ public class Enemies {
         return hit;
     }
 
-    public void update(float delta) {
+    void update(float delta) {
         for (Enemy enemy : enemyList) {
             enemy.update(delta);
         }
     }
 
-    public void render(ShapeRenderer shapeRenderer) {
+    void render(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Constants.ENEMY_COLOR);
         for (Enemy enemy : enemyList) {
             enemy.render(shapeRenderer);

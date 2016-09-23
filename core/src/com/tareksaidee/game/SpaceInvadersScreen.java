@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Created by tarek on 9/19/2016.
  */
-public class SpaceInvadersScreen implements Screen {
+class SpaceInvadersScreen implements Screen {
 
     ExtendViewport spaceInvadersViewport;
     ShapeRenderer renderer;
