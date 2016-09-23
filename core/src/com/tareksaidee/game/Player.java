@@ -43,6 +43,6 @@ public class Player {
         renderer.setColor(Constants.PLAYER_COLOR);
         renderer.set(ShapeRenderer.ShapeType.Filled);
         renderer.triangle(position.x-Constants.PLAYER_WIDTH/2,1,position.x+Constants.PLAYER_WIDTH/2,1,
-                position.x,Constants.PLAYER_HEIGHT, Color.WHITE,Color.BLUE,Color.PINK);
+                position.x,Constants.PLAYER_HEIGHT, Color.SKY,Color.RED,Color.GRAY);
     }
 }

@@ -26,6 +26,7 @@ public class Constants {
     public static final Vector2 ENEMY_OFFSET = new Vector2(10,10);
     public static final Vector2 ENEMY_NUMBER = new Vector2(8,3);
     public static final float ENEMY_PLAYER_DISTANCE = 50;
+    public static final Color ENEMY_COLOR = Color.GOLDENROD;
 
 
 

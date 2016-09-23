@@ -1,6 +1,5 @@
 package com.tareksaidee.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -49,7 +48,6 @@ public class Enemy {
     }
 
     public void render(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.RED);
         shapeRenderer.rect(position.x, position.y, Constants.ENEMY_DIMENSION.x,
                 Constants.ENEMY_DIMENSION.y);
     }

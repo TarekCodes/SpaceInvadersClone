@@ -57,6 +57,7 @@ public class Enemies {
     }
 
     public void render(ShapeRenderer shapeRenderer) {
+        shapeRenderer.setColor(Constants.ENEMY_COLOR);
         for (Enemy enemy : enemyList) {
             enemy.render(shapeRenderer);
         }
