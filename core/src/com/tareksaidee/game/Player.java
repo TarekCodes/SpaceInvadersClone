@@ -39,6 +39,16 @@ public class Player {
             position.x=viewport.getWorldWidth()-Constants.PLAYER_WIDTH/2;
     }
 
+    public boolean hitByBullet(Vector2 bulletPos) {
+        boolean hit = false;
+        if(position.x-Constants.PLAYER_WIDTH/2<=bulletPos.x
+                && position.x+Constants.PLAYER_WIDTH/2>=bulletPos.x
+                && ((1<=bulletPos.y && Constants.PLAYER_HEIGHT >= bulletPos.y) || (1<=bulletPos.y+5
+        && Constants.PLAYER_HEIGHT >= bulletPos.y+5)))
+            hit=true;
+        return hit;
+    }
+
     public void render(ShapeRenderer renderer) {
         renderer.setColor(Constants.PLAYER_COLOR);
         renderer.set(ShapeRenderer.ShapeType.Filled);

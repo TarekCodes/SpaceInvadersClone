@@ -27,9 +27,9 @@ public class SpaceInvadersScreen implements Screen {
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
         player = new Player(spaceInvadersViewport);
-        playerBullets = new Bullets(spaceInvadersViewport,true);
+        playerBullets = new Bullets(spaceInvadersViewport, true);
         enemies = new Enemies(spaceInvadersViewport);
-        enemyBullets = new Bullets(spaceInvadersViewport,false);
+        enemyBullets = new Bullets(spaceInvadersViewport, false);
     }
 
     @Override
@@ -38,9 +38,12 @@ public class SpaceInvadersScreen implements Screen {
         playerBullets.update(delta, player.position);
         enemies.update(delta);
         randNum = new Random().nextInt(enemies.enemyList.size);
-        enemyBullets.update(delta,enemies.enemyList.get(randNum).position);
-        if(enemies.hitByBullet(playerBullets.getBulletPos())) {
+        enemyBullets.update(delta, enemies.enemyList.get(randNum).position);
+        if (enemies.hitByBullet(playerBullets.getBulletPos())) {
             playerBullets.init();
+        }
+        if (player.hitByBullet(enemyBullets.getBulletPos())) {
+            resetGame();
         }
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
@@ -58,10 +61,7 @@ public class SpaceInvadersScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         spaceInvadersViewport.update(width, height, true);
-        player.init();
-        playerBullets.init();
-        enemies.init();
-        enemyBullets.init();
+        resetGame();
     }
 
     @Override
@@ -82,5 +82,12 @@ public class SpaceInvadersScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    private void resetGame() {
+        player.init();
+        playerBullets.init();
+        enemies.init();
+        enemyBullets.init();
     }
 }

@@ -22,7 +22,7 @@ public class Bullets {
     }
 
     public void init() {
-        bulletList = new DelayedRemovalArray<Bullet>(false, 100);
+        bulletList = new DelayedRemovalArray<Bullet>(false, 10);
     }
 
     public void update(float delta, Vector2 sourcePos) {
