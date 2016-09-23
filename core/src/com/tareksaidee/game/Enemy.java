@@ -30,14 +30,13 @@ class Enemy {
     void update(float delta) {
         position.x += speed * delta;
         checkBounds();
-        if (stepDown())
-            cycles = 0;
+        stepDown();
     }
 
     private boolean stepDown() {
         if (cycles == Constants.STEP_DOWN_AFTER && position.y > Constants.ENEMY_PLAYER_DISTANCE - offset.y) {
-            position.y -= Constants.ENEMY_OFFSET.y;
             cycles = 0;
+            position.y -= Constants.ENEMY_OFFSET.y;
             return true;
         }
         return false;
