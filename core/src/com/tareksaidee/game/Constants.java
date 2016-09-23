@@ -18,6 +18,8 @@ public class Constants {
 
     public static final float BULLET_SPEED = 50.0f;
     public static final float ALLOWED_BULLETS = 1;
+    public static final Color ENEMY_BULLET_COLOR = Color.GREEN;
+    public static final Color PLAYER_BULLET_COLOR = Color.BLACK;
 
     public static final float ENEMY_SPEED = 250f;
     public static final Vector2 ENEMY_DIMENSION = new Vector2(5,5);

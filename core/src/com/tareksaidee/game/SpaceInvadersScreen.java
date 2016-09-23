@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
+import java.util.Random;
+
 /**
  * Created by tarek on 9/19/2016.
  */
@@ -14,9 +16,10 @@ public class SpaceInvadersScreen implements Screen {
     ExtendViewport spaceInvadersViewport;
     ShapeRenderer renderer;
     Player player;
-    Bullets bullets;
+    Bullets playerBullets;
+    Bullets enemyBullets;
     Enemies enemies;
-
+    int randNum;
 
     @Override
     public void show() {
@@ -24,17 +27,20 @@ public class SpaceInvadersScreen implements Screen {
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
         player = new Player(spaceInvadersViewport);
-        bullets = new Bullets(spaceInvadersViewport);
+        playerBullets = new Bullets(spaceInvadersViewport,true);
         enemies = new Enemies(spaceInvadersViewport);
+        enemyBullets = new Bullets(spaceInvadersViewport,false);
     }
 
     @Override
     public void render(float delta) {
         player.update(delta);
-        bullets.update(delta, player.position);
+        playerBullets.update(delta, player.position);
         enemies.update(delta);
-        if(enemies.hitByBullet(bullets.getBulletPos())) {
-            bullets.init();
+        randNum = new Random().nextInt(enemies.enemyList.size);
+        enemyBullets.update(delta,enemies.enemyList.get(randNum).position);
+        if(enemies.hitByBullet(playerBullets.getBulletPos())) {
+            playerBullets.init();
         }
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
@@ -43,8 +49,9 @@ public class SpaceInvadersScreen implements Screen {
         renderer.setProjectionMatrix(spaceInvadersViewport.getCamera().combined);
         renderer.begin();
         player.render(renderer);
-        bullets.render(renderer);
+        playerBullets.render(renderer);
         enemies.render(renderer);
+        enemyBullets.render(renderer);
         renderer.end();
     }
 
@@ -52,8 +59,9 @@ public class SpaceInvadersScreen implements Screen {
     public void resize(int width, int height) {
         spaceInvadersViewport.update(width, height, true);
         player.init();
-        bullets.init();
+        playerBullets.init();
         enemies.init();
+        enemyBullets.init();
     }
 
     @Override
