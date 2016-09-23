@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Enemies {
     DelayedRemovalArray<Enemy> enemyList;
     private Viewport viewport;
+    int score;
 
     Enemies(Viewport viewport) {
         this.viewport = viewport;
@@ -19,6 +20,10 @@ class Enemies {
     }
 
     void init() {
+        if (enemyList != null) {
+            if (enemyList.size != 0)
+                score = 0;
+        }
         enemyList = new DelayedRemovalArray<Enemy>(false, (int) (Constants.ENEMY_NUMBER.x
                 * Constants.ENEMY_NUMBER.y));
         for (int i = 0; i < Constants.ENEMY_NUMBER.x; i++) {
@@ -41,6 +46,7 @@ class Enemies {
                             enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y + 5))) {
                 enemyList.removeIndex(i);
                 hit = true;
+                score++;
                 break;
             }
         }

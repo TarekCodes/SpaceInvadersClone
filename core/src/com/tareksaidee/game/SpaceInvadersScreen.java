@@ -3,8 +3,13 @@ package com.tareksaidee.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Random;
 
@@ -15,6 +20,9 @@ class SpaceInvadersScreen implements Screen {
 
     ExtendViewport spaceInvadersViewport;
     ShapeRenderer renderer;
+    ScreenViewport textViewport;
+    Batch batch;
+    BitmapFont font;
     Player player;
     Bullets playerBullets;
     Bullets enemyBullets;
@@ -26,6 +34,10 @@ class SpaceInvadersScreen implements Screen {
         spaceInvadersViewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
+        textViewport = new ScreenViewport();
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         player = new Player(spaceInvadersViewport);
         playerBullets = new Bullets(spaceInvadersViewport, true);
         enemies = new Enemies(spaceInvadersViewport);
@@ -56,11 +68,18 @@ class SpaceInvadersScreen implements Screen {
         enemies.render(renderer);
         enemyBullets.render(renderer);
         renderer.end();
+        textViewport.apply();
+        batch.setProjectionMatrix(textViewport.getCamera().combined);
+        batch.begin();
+        font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 20);
+        batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
         spaceInvadersViewport.update(width, height, true);
+        textViewport.update(width, height, true);
+        font.getData().setScale(Math.min(width, height) / Constants.FONT_SCALE);
         resetGame();
     }
 

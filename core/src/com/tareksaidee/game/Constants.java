@@ -29,5 +29,5 @@ class Constants {
     static final Color ENEMY_COLOR = Color.GOLDENROD;
     static final int STEP_DOWN_AFTER = 6;
 
-
+    static final int FONT_SCALE = 450;
 }
