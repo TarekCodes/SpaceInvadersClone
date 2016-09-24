@@ -68,11 +68,7 @@ class SpaceInvadersScreen implements Screen {
         enemies.render(renderer);
         enemyBullets.render(renderer);
         renderer.end();
-        textViewport.apply();
-        batch.setProjectionMatrix(textViewport.getCamera().combined);
-        batch.begin();
-        font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 20);
-        batch.end();
+        writeStats();
     }
 
     @Override
@@ -108,5 +104,14 @@ class SpaceInvadersScreen implements Screen {
         playerBullets.init();
         enemies.init();
         enemyBullets.init();
+    }
+
+    private void writeStats(){
+        textViewport.apply();
+        batch.setProjectionMatrix(textViewport.getCamera().combined);
+        batch.begin();
+        font.draw(batch, "Level: " + enemies.currentLevel,20,textViewport.getWorldHeight()-30);
+        font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
+        batch.end();
     }
 }

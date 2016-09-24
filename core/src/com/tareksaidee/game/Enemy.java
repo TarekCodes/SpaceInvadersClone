@@ -23,7 +23,7 @@ class Enemy {
     }
 
     private void init() {
-        position = new Vector2(offset.x + 1, viewport.getWorldHeight() - 25 - offset.y);
+        position = new Vector2(offset.x + 5, viewport.getWorldHeight() - 25 - offset.y);
         cycles = 0;
     }
 
@@ -43,7 +43,9 @@ class Enemy {
     }
 
     private void checkBounds() {
-        if (position.x - offset.x <= 1 || position.x + 5 + (70 - offset.x) > viewport.getWorldWidth() - 1) {
+        if (position.x - offset.x <= 1.5f || position.x + Constants.ENEMY_DIMENSION.x
+                + ((Constants.ENEMY_NUMBER.x*10)-10 - offset.x) >
+                viewport.getWorldWidth() - 1.5f) {
             speed = (-speed);
             cycles++;
         }

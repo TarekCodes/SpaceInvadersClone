@@ -13,16 +13,21 @@ class Enemies {
     DelayedRemovalArray<Enemy> enemyList;
     private Viewport viewport;
     int score;
+    int currentLevel;
 
     Enemies(Viewport viewport) {
         this.viewport = viewport;
+        score = 0;
+        currentLevel = 1;
         init();
     }
 
     void init() {
         if (enemyList != null) {
-            if (enemyList.size != 0)
+            if (enemyList.size != 0) {
                 score = 0;
+                currentLevel = 1;
+            }
         }
         enemyList = new DelayedRemovalArray<Enemy>(false, (int) (Constants.ENEMY_NUMBER.x
                 * Constants.ENEMY_NUMBER.y));
@@ -51,8 +56,10 @@ class Enemies {
             }
         }
         enemyList.end();
-        if (enemyList.size == 0)
+        if (enemyList.size == 0) {
+            currentLevel++;
             init();
+        }
         return hit;
     }
 

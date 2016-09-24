@@ -33,9 +33,9 @@ class Player {
     }
 
     private void checkBounds() {
-        //without ".1", the enemy bullet collision doesn't work properly when touching beginning of screen
+        //".1" makes enemy bullet collision work properly when player touching left side of screen
         if (position.x - Constants.PLAYER_WIDTH / 2 < 0)
-            position.x = (Constants.PLAYER_WIDTH / 2)+.1f;
+            position.x = (Constants.PLAYER_WIDTH / 2) + .1f;
         if (position.x + Constants.PLAYER_WIDTH / 2 > viewport.getWorldWidth())
             position.x = viewport.getWorldWidth() - Constants.PLAYER_WIDTH / 2;
     }
