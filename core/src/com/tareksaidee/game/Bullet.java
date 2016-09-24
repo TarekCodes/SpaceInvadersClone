@@ -9,14 +9,16 @@ import com.badlogic.gdx.math.Vector2;
 class Bullet {
     Vector2 position;
     boolean goUp;
+    float speed;
 
-    Bullet(Vector2 playerPos, boolean goUp) {
+    Bullet(Vector2 playerPos, boolean goUp, int level) {
         position = playerPos;
         this.goUp = goUp;
+        speed = Constants.BULLET_SPEED + (level * Constants.ENEMY_BULLET_LEVEL_FACTOR *((goUp)?0:1));
     }
 
     void update(float delta) {
-        position.y += Constants.BULLET_SPEED * delta * ((goUp) ? 1 : -1);
+        position.y += speed * delta * ((goUp) ? 1 : -1);
     }
 
     void render(ShapeRenderer shapeRenderer) {

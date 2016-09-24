@@ -18,7 +18,7 @@ class Enemies {
     Enemies(Viewport viewport) {
         this.viewport = viewport;
         score = 0;
-        currentLevel = 1;
+        currentLevel = 0;
         init();
     }
 
@@ -26,7 +26,7 @@ class Enemies {
         if (enemyList != null) {
             if (enemyList.size != 0) {
                 score = 0;
-                currentLevel = 1;
+                currentLevel = 0;
             }
         }
         enemyList = new DelayedRemovalArray<Enemy>(false, (int) (Constants.ENEMY_NUMBER.x
@@ -34,7 +34,7 @@ class Enemies {
         for (int i = 0; i < Constants.ENEMY_NUMBER.x; i++) {
             for (int x = 0; x < Constants.ENEMY_NUMBER.y; x++) {
                 enemyList.add(new Enemy(viewport, new Vector2(Constants.ENEMY_OFFSET.x * i,
-                        Constants.ENEMY_OFFSET.y * x)));
+                        Constants.ENEMY_OFFSET.y * x), currentLevel));
             }
         }
     }
@@ -51,7 +51,7 @@ class Enemies {
                             enemyList.get(i).position.y + Constants.ENEMY_DIMENSION.y >= bulletPos.y + 5))) {
                 enemyList.removeIndex(i);
                 hit = true;
-                score++;
+                score += 10;
                 break;
             }
         }

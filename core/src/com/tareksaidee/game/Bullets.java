@@ -25,11 +25,11 @@ class Bullets {
         bulletList = new DelayedRemovalArray<Bullet>(false, 10);
     }
 
-    void update(float delta, Vector2 sourcePos) {
+    void update(float delta, Vector2 sourcePos,int level) {
         if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) && bulletList.size < Constants.ALLOWED_BULLETS && goUp)
                 || (!goUp && bulletList.size < Constants.ALLOWED_BULLETS)) {
             Vector2 bulletPos = new Vector2(sourcePos.x, sourcePos.y);
-            Bullet bullet = new Bullet(bulletPos, goUp);
+            Bullet bullet = new Bullet(bulletPos, goUp, level);
             bulletList.add(bullet);
         }
 

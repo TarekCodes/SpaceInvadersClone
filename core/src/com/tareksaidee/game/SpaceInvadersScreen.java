@@ -47,10 +47,10 @@ class SpaceInvadersScreen implements Screen {
     @Override
     public void render(float delta) {
         player.update(delta);
-        playerBullets.update(delta, player.position);
+        playerBullets.update(delta, player.position,enemies.currentLevel);
         enemies.update(delta);
         randNum = new Random().nextInt(enemies.enemyList.size);
-        enemyBullets.update(delta, enemies.enemyList.get(randNum).position);
+        enemyBullets.update(delta, enemies.enemyList.get(randNum).position,enemies.currentLevel);
         if (enemies.hitByBullet(playerBullets.getBulletPos())) {
             playerBullets.init();
         }
@@ -110,7 +110,7 @@ class SpaceInvadersScreen implements Screen {
         textViewport.apply();
         batch.setProjectionMatrix(textViewport.getCamera().combined);
         batch.begin();
-        font.draw(batch, "Level: " + enemies.currentLevel,20,textViewport.getWorldHeight()-30);
+        font.draw(batch, "Level: " + (enemies.currentLevel+1),20,textViewport.getWorldHeight()-30);
         font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
         batch.end();
     }
