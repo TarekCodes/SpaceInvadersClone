@@ -3,7 +3,7 @@ This is a multi-platform game that was created using Java and libGDX framework. 
 similar to Space Invaders but it does have some differences in terms of gameplay. Currently is %100 playable but I still have a lot of improvments
 and ideas that I want to implement but haven't gotten to do so yet.
 ### TODOs
-These are some of ideas that I'm going implement very soon:
+These are some of ideas that I'm going to implement very soon:
 <ul>
 <li>Set a certain number of lives to the player</li>
 <li>Add something for the player to hide underneath until it gets destroyed by the enemies or the player</li>
