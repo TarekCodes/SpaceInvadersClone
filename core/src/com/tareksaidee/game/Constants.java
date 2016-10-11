@@ -32,8 +32,11 @@ class Constants {
     static final int STEP_DOWN_AFTER = 6;
 
     static final int FONT_SCALE = 450;
+    static final String INTRO_MESSAGE = "TOUCH ANYWHERE TO START!";
 }
 
+//TODO design intro screen
+//TODO add pics
 //TODO add lives
 //TODO add shelter
 //TODO add top score

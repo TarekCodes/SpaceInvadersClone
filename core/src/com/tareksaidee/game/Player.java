@@ -21,7 +21,6 @@ class Player {
 
     void init() {
         position = new Vector2(viewport.getWorldWidth() / 2, Constants.PLAYER_HEIGHT);
-        System.out.println(position.x);
     }
 
     void update(float delta) {
