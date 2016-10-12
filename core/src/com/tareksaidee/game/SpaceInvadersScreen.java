@@ -1,6 +1,7 @@
 package com.tareksaidee.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +17,7 @@ import java.util.Random;
 /**
  * Created by tarek on 9/19/2016.
  */
-class SpaceInvadersScreen implements Screen {
+class SpaceInvadersScreen extends InputAdapter implements Screen {
 
     ExtendViewport spaceInvadersViewport;
     ShapeRenderer renderer;
@@ -42,15 +43,16 @@ class SpaceInvadersScreen implements Screen {
         playerBullets = new Bullets(spaceInvadersViewport, true);
         enemies = new Enemies(spaceInvadersViewport);
         enemyBullets = new Bullets(spaceInvadersViewport, false);
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render(float delta) {
         player.update(delta);
-        playerBullets.update(delta, player.position,enemies.currentLevel);
+        playerBullets.update(delta, player.position, enemies.currentLevel);
         enemies.update(delta);
         randNum = new Random().nextInt(enemies.enemyList.size);
-        enemyBullets.update(delta, enemies.enemyList.get(randNum).position,enemies.currentLevel);
+        enemyBullets.update(delta, enemies.enemyList.get(randNum).position, enemies.currentLevel);
         if (enemies.hitByBullet(playerBullets.getBulletPos())) {
             playerBullets.init();
         }
@@ -92,6 +94,7 @@ class SpaceInvadersScreen implements Screen {
     @Override
     public void hide() {
         renderer.dispose();
+        batch.dispose();
     }
 
     @Override
@@ -106,11 +109,17 @@ class SpaceInvadersScreen implements Screen {
         enemyBullets.init();
     }
 
-    private void writeStats(){
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        playerBullets.fireBullet(player.position, enemies.currentLevel);
+        return true;
+    }
+
+    private void writeStats() {
         textViewport.apply();
         batch.setProjectionMatrix(textViewport.getCamera().combined);
         batch.begin();
-        font.draw(batch, "Level: " + (enemies.currentLevel+1),20,textViewport.getWorldHeight()-30);
+        font.draw(batch, "Level: " + (enemies.currentLevel + 1), 20, textViewport.getWorldHeight() - 30);
         font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
         batch.end();
     }

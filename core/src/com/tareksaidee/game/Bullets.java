@@ -25,12 +25,10 @@ class Bullets {
         bulletList = new DelayedRemovalArray<Bullet>(false, 10);
     }
 
-    void update(float delta, Vector2 sourcePos,int level) {
+    void update(float delta, Vector2 sourcePos, int level) {
         if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) && bulletList.size < Constants.ALLOWED_BULLETS && goUp)
                 || (!goUp && bulletList.size < Constants.ALLOWED_BULLETS)) {
-            Vector2 bulletPos = new Vector2(sourcePos.x, sourcePos.y);
-            Bullet bullet = new Bullet(bulletPos, goUp, level);
-            bulletList.add(bullet);
+            fireBullet(sourcePos, level);
         }
 
         for (Bullet bullet : bulletList) {
@@ -57,6 +55,14 @@ class Bullets {
         renderer.setColor(((goUp) ? Constants.PLAYER_BULLET_COLOR : Constants.ENEMY_BULLET_COLOR));
         for (Bullet bullet : bulletList) {
             bullet.render(renderer);
+        }
+    }
+
+    void fireBullet(Vector2 sourcePos, int level) {
+        if (bulletList.size < Constants.ALLOWED_BULLETS) {
+            Vector2 bulletPos = new Vector2(sourcePos.x, sourcePos.y);
+            Bullet bullet = new Bullet(bulletPos, goUp, level);
+            bulletList.add(bullet);
         }
     }
 }

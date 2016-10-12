@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -19,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 class IntroScreen extends InputAdapter implements Screen {
 
-    ShapeRenderer renderer;
+
     SpriteBatch batch;
     FitViewport viewport;
     BitmapFont font;
@@ -31,12 +30,11 @@ class IntroScreen extends InputAdapter implements Screen {
 
     @Override
     public void show() {
-        renderer = new ShapeRenderer();
         batch = new SpriteBatch();
         viewport = new FitViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         Gdx.input.setInputProcessor(this);
         font = new BitmapFont();
-        font.getData().setScale(.4f);
+        font.getData().setScale(.5f);
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
