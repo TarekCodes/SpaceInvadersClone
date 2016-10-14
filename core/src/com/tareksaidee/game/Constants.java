@@ -40,5 +40,5 @@ class Constants {
 //TODO add lives
 //TODO add shelter
 //TODO add top score
-//TODO add intro screen
+//TODO two point touch
 //TODO  bullet-bullet collision?
