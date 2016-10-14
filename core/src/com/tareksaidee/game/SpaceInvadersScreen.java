@@ -46,12 +46,12 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemies = new Enemies(spaceInvadersViewport);
         enemyBullets = new Bullets(spaceInvadersViewport, false);
         Gdx.input.setInputProcessor(this);
-        temp=(spaceInvadersViewport.getScreenWidth()/3)*2;
+        temp = (spaceInvadersViewport.getScreenWidth() / 3) * 2;
     }
 
     @Override
     public void render(float delta) {
-        delt=delta;
+        delt = delta;
         player.update(delta);
         playerBullets.update(delta, player.position, enemies.currentLevel);
         enemies.update(delta);
@@ -63,6 +63,7 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         if (player.hitByBullet(enemyBullets.getBulletPos())) {
             resetGame();
         }
+        touchControl(delta);
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
                 Constants.BACKGROUND_COLOR.b, 1);
@@ -113,23 +114,6 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemyBullets.init();
     }
 
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if(screenX<temp)
-            player.moveLeft(delt);
-        if(screenX>temp)
-            player.moveRight(delt);
-        temp=screenX;
-        return true;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(screenX<spaceInvadersViewport.getScreenWidth()/2) {
-            playerBullets.fireBullet(player.position, enemies.currentLevel);
-        }
-        return true;
-    }
 
     private void writeStats() {
         textViewport.apply();
@@ -138,5 +122,21 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         font.draw(batch, "Level: " + (enemies.currentLevel + 1), 20, textViewport.getWorldHeight() - 30);
         font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
         batch.end();
+    }
+
+    private void touchControl(float delta) {
+        for (int i = 0; i < 20; i++) {
+            if (Gdx.input.isTouched(i)) {
+                if (Gdx.input.getX(i) > spaceInvadersViewport.getScreenWidth() / 2) {
+                    if (Gdx.input.getY(i) < (spaceInvadersViewport.getScreenHeight() / 4)*3)
+                        player.moveLeft(delta);
+                    else
+                        player.moveRight(delta);
+                }
+                else{
+                    playerBullets.fireBullet(player.position, enemies.currentLevel);
+                }
+            }
+        }
     }
 }
