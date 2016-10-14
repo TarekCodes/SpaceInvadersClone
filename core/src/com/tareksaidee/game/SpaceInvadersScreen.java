@@ -111,7 +111,9 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        playerBullets.fireBullet(player.position, enemies.currentLevel);
+        if(screenX<spaceInvadersViewport.getScreenWidth()/2) {
+            playerBullets.fireBullet(player.position, enemies.currentLevel);
+        }
         return true;
     }
 
