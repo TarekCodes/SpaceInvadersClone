@@ -25,9 +25,9 @@ class Player {
 
     void update(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            position.x -= (delta * Constants.PLAYER_MOVEMENT_SPEED);
+            moveLeft(delta);
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            position.x += (delta * Constants.PLAYER_MOVEMENT_SPEED);
+            moveRight(delta);
         checkBounds();
     }
 
@@ -54,5 +54,13 @@ class Player {
         renderer.set(ShapeRenderer.ShapeType.Filled);
         renderer.triangle(position.x - Constants.PLAYER_WIDTH / 2, 1, position.x + Constants.PLAYER_WIDTH / 2, 1,
                 position.x, Constants.PLAYER_HEIGHT, Color.SKY, Color.RED, Color.GRAY);
+    }
+
+    void moveLeft(float delta){
+        position.x -= (delta * Constants.PLAYER_MOVEMENT_SPEED);
+    }
+
+    void moveRight(float delta){
+        position.x += (delta * Constants.PLAYER_MOVEMENT_SPEED);
     }
 }

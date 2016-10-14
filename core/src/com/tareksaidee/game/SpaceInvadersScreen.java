@@ -29,6 +29,8 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
     Bullets enemyBullets;
     Enemies enemies;
     int randNum;
+    int temp;
+    float delt;
 
     @Override
     public void show() {
@@ -44,10 +46,12 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemies = new Enemies(spaceInvadersViewport);
         enemyBullets = new Bullets(spaceInvadersViewport, false);
         Gdx.input.setInputProcessor(this);
+        temp=(spaceInvadersViewport.getScreenWidth()/3)*2;
     }
 
     @Override
     public void render(float delta) {
+        delt=delta;
         player.update(delta);
         playerBullets.update(delta, player.position, enemies.currentLevel);
         enemies.update(delta);
@@ -107,6 +111,16 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         playerBullets.init();
         enemies.init();
         enemyBullets.init();
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if(screenX<temp)
+            player.moveLeft(delt);
+        if(screenX>temp)
+            player.moveRight(delt);
+        temp=screenX;
+        return true;
     }
 
     @Override
