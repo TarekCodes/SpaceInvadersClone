@@ -25,7 +25,7 @@ class Enemy {
     }
 
     private void init() {
-        position = new Vector2(offset.x + 5, viewport.getWorldHeight() - 25 - offset.y);
+        position = new Vector2(offset.x + 5, viewport.getWorldHeight() - 20 - offset.y);
         cycles = 0;
         speed = Constants.ENEMY_SPEED + (Constants.ENEMY_SPEED_LEVEL_FACTOR * level);
         cyclesCount = 0;
