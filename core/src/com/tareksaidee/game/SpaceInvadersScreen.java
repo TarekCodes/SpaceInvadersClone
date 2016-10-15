@@ -24,6 +24,7 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
     ScreenViewport textViewport;
     Batch batch;
     BitmapFont font;
+    SpaceInvadersGame game;
     Player player;
     Bullets playerBullets;
     Bullets enemyBullets;
@@ -31,6 +32,8 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
     int randNum;
     int temp;
     float delt;
+
+    public SpaceInvadersScreen(SpaceInvadersGame game){this.game = game;}
 
     @Override
     public void show() {
@@ -54,16 +57,10 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         delt = delta;
         player.update(delta);
         playerBullets.update(delta, player.position, enemies.currentLevel);
+        touchControl(delta);
         enemies.update(delta);
         randNum = new Random().nextInt(enemies.enemyList.size);
         enemyBullets.update(delta, enemies.enemyList.get(randNum).position, enemies.currentLevel);
-        if (enemies.hitByBullet(playerBullets.getBulletPos())) {
-            playerBullets.init();
-        }
-        if (player.hitByBullet(enemyBullets.getBulletPos())) {
-            resetGame();
-        }
-        touchControl(delta);
         spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
                 Constants.BACKGROUND_COLOR.b, 1);
@@ -76,6 +73,18 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemyBullets.render(renderer);
         renderer.end();
         writeStats();
+        if (enemies.hitByBullet(playerBullets.getBulletPos())) {
+            playerBullets.init();
+        }
+        if (player.hitByBullet(enemyBullets.getBulletPos())) {
+            if(player.isGameOver()) {
+                game.showIntroScreen();
+            }
+            else {
+                player.init();
+                enemyBullets.init();
+            }
+        }
     }
 
     @Override

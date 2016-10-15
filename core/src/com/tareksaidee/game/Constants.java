@@ -15,6 +15,7 @@ class Constants {
     static final int PLAYER_HEIGHT = 14;
     static final Color PLAYER_COLOR = Color.RED;
     static final float PLAYER_MOVEMENT_SPEED = 100.0f;
+    static final int PLAYER_NUMBER_OF_LIVES = 3;
 
     static final float BULLET_SPEED = 130.0f;
     static final float ALLOWED_BULLETS = 1;

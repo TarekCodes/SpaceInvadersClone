@@ -13,10 +13,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     Vector2 position;
     private Viewport viewport;
+    int deaths;
 
     Player(Viewport viewport) {
         this.viewport = viewport;
         init();
+        deaths=0;
     }
 
     void init() {
@@ -62,5 +64,14 @@ class Player {
 
     void moveRight(float delta){
         position.x += (delta * Constants.PLAYER_MOVEMENT_SPEED);
+    }
+
+    boolean isGameOver(){
+        deaths++;
+        if(deaths>=Constants.PLAYER_NUMBER_OF_LIVES){
+            deaths=0;
+            return true;
+        }
+        return false;
     }
 }
