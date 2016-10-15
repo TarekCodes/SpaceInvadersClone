@@ -128,8 +128,10 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         textViewport.apply();
         batch.setProjectionMatrix(textViewport.getCamera().combined);
         batch.begin();
-        font.draw(batch, "Level: " + (enemies.currentLevel + 1), 20, textViewport.getWorldHeight() - 30);
+        font.draw(batch, "Level: " + (enemies.currentLevel + 1), 20, textViewport.getWorldHeight() - 40);
         font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
+        font.draw(batch, "Lives: " + (Constants.PLAYER_NUMBER_OF_LIVES-player.deaths),
+                textViewport.getWorldWidth()-100, textViewport.getWorldHeight() - 10);
         batch.end();
     }
 

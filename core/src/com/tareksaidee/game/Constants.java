@@ -38,7 +38,7 @@ class Constants {
 
 //TODO design intro screen
 //TODO add pics
-//TODO add lives
+//TODO fix stats drawing
 //TODO add shelter
 //TODO add top score
 //TODO two point touch
