@@ -16,4 +16,9 @@ public class SpaceInvadersGame extends Game {
         setScreen(new IntroScreen(this));
     }
 
+    public void showGameOverScreen() {
+        setScreen(new GameOverScreen(this));
+    }
+
+
 }

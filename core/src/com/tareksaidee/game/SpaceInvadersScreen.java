@@ -78,7 +78,7 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         }
         if (player.hitByBullet(enemyBullets.getBulletPos())) {
             if(player.isGameOver()) {
-                game.showIntroScreen();
+                game.showGameOverScreen();
             }
             else {
                 player.init();

@@ -34,6 +34,8 @@ class Constants {
 
     static final int FONT_SCALE = 450;
     static final String INTRO_MESSAGE = "TOUCH ANYWHERE TO START!";
+    static final String GAME_OVER = "GAME OVER!! :(";
+    static final String PLAY_AGAIN = "\n\nTouch anywhere to play again";
 }
 
 //TODO design intro screen
