@@ -61,10 +61,11 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemies.update(delta);
         randNum = new Random().nextInt(enemies.enemyList.size);
         enemyBullets.update(delta, enemies.enemyList.get(randNum).position, enemies.currentLevel);
-        spaceInvadersViewport.apply(true);
         Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g,
                 Constants.BACKGROUND_COLOR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        writeStats();
+        spaceInvadersViewport.apply(true);
         renderer.setProjectionMatrix(spaceInvadersViewport.getCamera().combined);
         renderer.begin();
         player.render(renderer);
@@ -72,7 +73,6 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         enemies.render(renderer);
         enemyBullets.render(renderer);
         renderer.end();
-        writeStats();
         if (enemies.hitByBullet(playerBullets.getBulletPos())) {
             playerBullets.init();
         }
