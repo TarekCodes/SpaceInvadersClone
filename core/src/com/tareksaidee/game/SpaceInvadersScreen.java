@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -30,6 +31,7 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
     Bullets enemyBullets;
     Enemies enemies;
     Texture backgroundImage;
+    TextureRegion backgroundRegion;
     int randNum;
     int temp;
     float delt;
@@ -49,6 +51,8 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         playerBullets = new Bullets(spaceInvadersViewport, true);
         enemies = new Enemies(spaceInvadersViewport);
         enemyBullets = new Bullets(spaceInvadersViewport, false);
+        backgroundImage = new Texture(Gdx.files.internal("spaceBackground.jpg"));
+        backgroundRegion = new TextureRegion(backgroundImage,2000,1000);
         Gdx.input.setInputProcessor(this);
         temp = (spaceInvadersViewport.getScreenWidth() / 3) * 2;
     }
@@ -129,6 +133,9 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
         textViewport.apply();
         batch.setProjectionMatrix(textViewport.getCamera().combined);
         batch.begin();
+        batch.disableBlending();
+        batch.draw(backgroundRegion,0,0);
+        batch.enableBlending();
         font.draw(batch, "Level: " + (enemies.currentLevel + 1), 20, textViewport.getWorldHeight() - 40);
         font.draw(batch, "Score: " + enemies.score, 20, textViewport.getWorldHeight() - 10);
         font.draw(batch, "Lives: " + (Constants.PLAYER_NUMBER_OF_LIVES-player.deaths),
