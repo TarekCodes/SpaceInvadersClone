@@ -29,6 +29,7 @@ class SpaceInvadersScreen extends InputAdapter implements Screen {
     Bullets playerBullets;
     Bullets enemyBullets;
     Enemies enemies;
+    Texture backgroundImage;
     int randNum;
     int temp;
     float delt;
